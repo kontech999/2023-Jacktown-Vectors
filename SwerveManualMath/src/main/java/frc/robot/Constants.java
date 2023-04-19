@@ -16,4 +16,16 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+  public static final int FRONT_LEFT_ID = 1;
+  public static final int FRONT_LEFT_ROTATE_ID = 2;
+  public static final int FRONT_RIGHT_ID = 3;
+  public static final int FRONT_RIGHT_ROTATE_ID = 4;
+  public static final int BACK_LEFT_ID = 5;
+  public static final int BACK_LEFT_ROTATE_ID = 6;
+  public static final int BACK_RIGHT_ID = 7;
+  public static final int BACK_RIGHT_ROTATE_ID = 8;
+  public static final int LEFT_JOYSTICK_ID = 0;
+  public static final int RIGHT_JOYSTICK_ID = 1;
+  public static final int LEFT_JOYSTICK_Y_AXIS_ID = 0;
+  public static final int RIGHT_JOYSTICK_Y_AXIS_ID = 0;
 }
