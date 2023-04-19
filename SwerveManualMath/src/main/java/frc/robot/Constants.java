@@ -26,6 +26,7 @@ public final class Constants {
   public static final int BACK_RIGHT_ROTATE_ID = 8;
   public static final int LEFT_JOYSTICK_ID = 0;
   public static final int RIGHT_JOYSTICK_ID = 1;
-  public static final int LEFT_JOYSTICK_Y_AXIS_ID = 0;
-  public static final int RIGHT_JOYSTICK_Y_AXIS_ID = 0;
+  public static final int LEFT_JOYSTICK_Y_AXIS_ID = 1;
+  public static final int LEFT_JOYSTICK_X_AXIS_ID = 0;
+  public static final int RIGHT_JOYSTICK_X_AXIS_ID = 0;
 }
