@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.networktables.DoubleEntry;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -20,6 +21,7 @@ public class DriveTrain extends CommandBase {
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.m_chasis);
   }
 
   // Called when the command is initially scheduled.
@@ -59,10 +61,18 @@ public class DriveTrain extends CommandBase {
       ws_BL = ws_BL/ws_MAX;
     }
 
-    RobotContainer.m_chasis.updateFrontLeft(ws_FL, wa_FL);
-    RobotContainer.m_chasis.updateFrontRight(ws_FR, wa_FR);
-    RobotContainer.m_chasis.updateBackLeft(ws_BL, wa_BL);
-    RobotContainer.m_chasis.updateBackRight(ws_BR, wa_BR);
+    SmartDashboard.putNumber("FL Speed", ws_FL);
+    SmartDashboard.putNumber("FL targetAngle", wa_FL);
+    // This is correct
+    // RobotContainer.m_chasis.updateFrontLeft(ws_FL, wa_FL*(5/(2*Math.PI)));
+    // RobotContainer.m_chasis.updateFrontRight(ws_FR, wa_FR*(5/(2*Math.PI)));
+    // RobotContainer.m_chasis.updateBackLeft(ws_BL, wa_BL*(5/(2*Math.PI)));
+    // RobotContainer.m_chasis.updateBackRight(ws_BR, wa_BR*(5/(2*Math.PI)));
+
+    RobotContainer.m_chasis.updateFrontLeft(0, wa_FL*(5/(2*Math.PI)));
+    RobotContainer.m_chasis.updateFrontRight(0, wa_FR*(5/(2*Math.PI)));
+    RobotContainer.m_chasis.updateBackLeft(0, wa_BL*(5/(2*Math.PI)));
+    RobotContainer.m_chasis.updateBackRight(0, wa_BR*(5/(2*Math.PI)));
 
   }
 

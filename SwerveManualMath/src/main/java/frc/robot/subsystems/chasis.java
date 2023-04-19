@@ -10,6 +10,7 @@ import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants;
+import frc.robot.commands.DriveTrain;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
@@ -32,6 +33,7 @@ public class chasis extends SubsystemBase {
   public AnalogInput backLeftEncoder;
   public AnalogInput backRightEncoder;
   public SwerveModule frontLeft, frontRight, backLeft, backRight;
+
   public chasis() {
     frontLeftMotor = new CANSparkMax(Constants.FRONT_LEFT_ID, MotorType.kBrushless);
     frontLeftRotateMotor = new CANSparkMax(Constants.FRONT_LEFT_ROTATE_ID, MotorType.kBrushless);
@@ -74,7 +76,6 @@ public class chasis extends SubsystemBase {
     backRight.setAngle(angle);
   }
 
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -82,22 +83,52 @@ public class chasis extends SubsystemBase {
     SmartDashboard.putNumber("frontRightEncoderValue", frontRightEncoder.getVoltage());
     SmartDashboard.putNumber("backLeftEncoderValue", backLeftEncoder.getVoltage());
     SmartDashboard.putNumber("backRightEncoderValue", backRightEncoder.getVoltage());
+    setDefaultCommand(new DriveTrain());
   }
 }
+
 class SwerveModule {
   CANSparkMax rotateMotor, powerMotor;
   PIDController pid;
   AnalogInput encoder;
+
   SwerveModule(CANSparkMax rotateMotor, CANSparkMax powerMotor, AnalogInput encoder) {
     this.powerMotor = powerMotor;
     this.rotateMotor = rotateMotor;
     this.encoder = encoder;
-    pid = new PIDController(0.7, 0, 0);
+    pid = new PIDController(0.01, 0, 0);
   }
+
   public void setSpeed(double speed) {
     powerMotor.set(speed);
   }
+
   public void setAngle(double angle) {
-    rotateMotor.set(pid.calculate(encoder.getVoltage(), angle));
+    double error;
+    double encoderValue = encoder.getVoltage();
+    double max = Math.max(encoderValue, angle);
+    double diff = 5 - max;
+    if (encoderValue == max) {
+      encoderValue = 0;
+      angle += diff;
+      error = angle;
+    } else {
+      encoderValue += diff;
+      error = encoderValue;
+      angle = 0;
+    }
+
+    if (encoder.getVoltage() > 2.5) {
+      rotateMotor.setInverted(true);
+    } else {
+      rotateMotor.setInverted(false);
+    }
+    SmartDashboard.putNumber("RotationSpeed", (error * 0.05));
+    SmartDashboard.putNumber("RotationError", error);
+    if (Math.abs(error) < 0.01) {
+      rotateMotor.set(0);
+    } else {
+      rotateMotor.set(Math.abs(error * 0.05));
+    }
   }
 }

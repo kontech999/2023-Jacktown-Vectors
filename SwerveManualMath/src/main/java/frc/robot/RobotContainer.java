@@ -67,12 +67,21 @@ private Joystick rightJoy = new Joystick(Constants.RIGHT_JOYSTICK_ID);
     return Autos.exampleAuto(m_exampleSubsystem);
   }
   public double getFWD() {
+    if(Math.abs(leftJoy.getRawAxis(Constants.LEFT_JOYSTICK_Y_AXIS_ID)) < 0.03) {
+      return 0;
+    }
     return leftJoy.getRawAxis(Constants.LEFT_JOYSTICK_Y_AXIS_ID);
   }
   public double getSTR() {
+    if(Math.abs(leftJoy.getRawAxis(Constants.LEFT_JOYSTICK_X_AXIS_ID)) < 0.03) {
+      return 0;
+    }
     return leftJoy.getRawAxis(Constants.LEFT_JOYSTICK_X_AXIS_ID);
   }
   public double getROT() {
+    if(Math.abs(rightJoy.getRawAxis(Constants.RIGHT_JOYSTICK_X_AXIS_ID)) < 0.03) {
+      return 0;
+    }
     return rightJoy.getRawAxis(Constants.RIGHT_JOYSTICK_X_AXIS_ID);
   }
 
