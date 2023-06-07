@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -13,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.Constants.OperatorConstants;
@@ -22,6 +25,7 @@ import frc.robot.commands.TurnCommand;
 import frc.robot.commands.Autonomous.BalanceCommand;
 import frc.robot.commands.Limelight.LLAlignCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.arm;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -36,6 +40,7 @@ public class RobotContainer {
 
 	// The robot's subsystems and commands are defined here...
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	public static arm m_arm = new arm();
 
 	public final static PathBuilder autoBuilder = new PathBuilder();
 
@@ -47,7 +52,27 @@ public class RobotContainer {
 			OperatorConstants.kOperatorControllerPort);
 	private final CommandXboxController programmerController = new CommandXboxController(
 			OperatorConstants.kProgrammerControllerPort);
-
+	
+	private Joystick Leftjoy = new Joystick(OperatorConstants.kDriveJoystickPort);
+	private Joystick Rightjoy = new Joystick(OperatorConstants.kTurnJoystickPort);
+	private XboxController Controller1 = new XboxController(Constants.XBOXCONTROLLER_ID);
+	private CommandXboxController ccontroller = new CommandXboxController(Constants.XBOXCONTROLLER_ID);
+	public JoystickButton button12 = new JoystickButton(Leftjoy, Constants.BUTTON_12_ID);
+	public JoystickButton button10 = new JoystickButton(Leftjoy, Constants.BUTTON_10_ID);
+	public JoystickButton button9 = new JoystickButton(Leftjoy, Constants.BUTTON_9_ID);
+	public JoystickButton button8 = new JoystickButton(Leftjoy, Constants.BUTTON_8_ID);
+	public JoystickButton button7 = new JoystickButton(Leftjoy, Constants.BUTTON_7_ID);
+	public JoystickButton lTrigger = new JoystickButton(Leftjoy, Constants.BUTTON_1_ID);
+	public JoystickButton rTrigger = new JoystickButton(Rightjoy, Constants.BUTTON_1_ID);
+	public JoystickButton button2 = new JoystickButton(Rightjoy, Constants.BUTTON_2_ID);
+	Trigger xButton = ccontroller.x(); // Creates a new Trigger object for the `X` button on exampleCommandController
+	Trigger yButton = ccontroller.y();
+	boolean abutton = Controller1.getAButtonPressed();
+	Trigger lbumper = ccontroller.leftBumper();
+	Trigger rbumper = ccontroller.rightBumper();
+	Trigger XboxButton9 = ccontroller.button(9);
+	Trigger XboxButton10 = ccontroller.button(10);
+	Trigger backButton = ccontroller.back();
 	private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 	/**
@@ -119,6 +144,34 @@ public class RobotContainer {
 						driveSubsystem));
 		// endregion
 	}
+
+	public double GetXboxStickLeft() {
+		return Controller1.getLeftY();
+	}
+
+	public double GetXboxStickRight() {
+		return Controller1.getRightY();
+	}
+
+	public double getJoyStickTriggerL() {
+		return Controller1.getLeftTriggerAxis();
+	  }
+	
+	  public double getJoyStickTriggerR() {
+		return Controller1.getRightTriggerAxis();
+	  }
+	
+	  public boolean getdpad() {
+		return Controller1.getPOV() >= 0;
+	  }
+	
+	  public boolean getXboxButton9() {
+		return XboxButton9.getAsBoolean();
+	  }
+	
+	  public boolean getXboxButton10() {
+		return XboxButton10.getAsBoolean();
+	  }
 
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.
