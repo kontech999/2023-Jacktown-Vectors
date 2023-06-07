@@ -104,31 +104,13 @@ class SwerveModule {
   }
 
   public void setAngle(double angle) {
-    double error;
-    double encoderValue = encoder.getVoltage();
-    double max = Math.max(encoderValue, angle);
-    double diff = 5 - max;
-    if (encoderValue == max) {
-      encoderValue = 0;
-      angle += diff;
-      error = angle;
-    } else {
-      encoderValue += diff;
-      error = encoderValue;
-      angle = 0;
+    if (angle < 0) {
+      angle += 5;
     }
-
-    if (encoder.getVoltage() > 2.5) {
-      rotateMotor.setInverted(true);
-    } else {
-      rotateMotor.setInverted(false);
+    double error = Math.IEEEremainder(encoder.getVoltage() - angle, 5);
+    if (error > 5 / 4) {
     }
-    SmartDashboard.putNumber("RotationSpeed", (error * 0.05));
-    SmartDashboard.putNumber("RotationError", error);
-    if (Math.abs(error) < 0.01) {
-      rotateMotor.set(0);
-    } else {
-      rotateMotor.set(Math.abs(error * 0.05));
-    }
+    rotateMotor.set(error * 0.4);
+  
   }
 }
