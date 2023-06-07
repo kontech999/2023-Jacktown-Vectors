@@ -21,11 +21,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.TractorToolbox.JoystickUtils;
 import frc.robot.TractorToolbox.TractorParts.PathBuilder;
+import frc.robot.commands.ClawToggle;
 import frc.robot.commands.TurnCommand;
 import frc.robot.commands.Autonomous.BalanceCommand;
 import frc.robot.commands.Limelight.LLAlignCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.arm;
+import frc.robot.subsystems.clawSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -41,6 +43,8 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	public static arm m_arm = new arm();
+	public static clawSubsystem m_claw = new clawSubsystem();
+
 
 	public final static PathBuilder autoBuilder = new PathBuilder();
 
@@ -52,7 +56,7 @@ public class RobotContainer {
 			OperatorConstants.kOperatorControllerPort);
 	private final CommandXboxController programmerController = new CommandXboxController(
 			OperatorConstants.kProgrammerControllerPort);
-	
+
 	private Joystick Leftjoy = new Joystick(OperatorConstants.kDriveJoystickPort);
 	private Joystick Rightjoy = new Joystick(OperatorConstants.kTurnJoystickPort);
 	private XboxController Controller1 = new XboxController(Constants.XBOXCONTROLLER_ID);
@@ -123,6 +127,11 @@ public class RobotContainer {
 		programmerController.button(8).onTrue(new InstantCommand(() -> driveSubsystem.zeroHeading()));
 		programmerController.button(6).onTrue(driveSubsystem.toggleFieldCentric());
 
+		button12.whileTrue(new BalanceCommand());
+		// Runs limemlightCommand while button 7 is pressed
+		// backButton.onTrue(new ManualModeToggle()); FIXME
+		rbumper.onTrue(new ClawToggle());
+
 		driveJoystick.povUp().whileTrue(
 				new RunCommand(() -> driveSubsystem.robotCentricDrive(0.05, 0, 0), driveSubsystem));
 		driveJoystick.povDown().whileTrue(
@@ -155,23 +164,64 @@ public class RobotContainer {
 
 	public double getJoyStickTriggerL() {
 		return Controller1.getLeftTriggerAxis();
-	  }
-	
-	  public double getJoyStickTriggerR() {
+	}
+
+	public double getJoyStickTriggerR() {
 		return Controller1.getRightTriggerAxis();
-	  }
-	
-	  public boolean getdpad() {
+	}
+
+	public boolean getdpad() {
 		return Controller1.getPOV() >= 0;
-	  }
-	
-	  public boolean getXboxButton9() {
+	}
+
+	public boolean getXboxButton9() {
 		return XboxButton9.getAsBoolean();
-	  }
-	
-	  public boolean getXboxButton10() {
+	}
+
+	public boolean getXboxButton10() {
 		return XboxButton10.getAsBoolean();
-	  }
+	}
+
+	public double isArmButtonPressed() {
+		if (Controller1.getStartButton())
+			// home pos
+			return 0.87;
+		if (Controller1.getYButton())
+			// High pos
+			return 0.67;
+		if (Controller1.getBButton())
+			// Medium pos
+			return 0.70;
+		if (Controller1.getAButton())
+			// Low pos
+			return 0.80;
+		if (Controller1.getXButton()) {
+			// Loading pos
+			// return 0.84;
+			return 0.71;
+		}
+		return Math.PI;
+	}
+
+	public double isArmButtonPressedBC() {
+		if (Controller1.getStartButton())
+			// Home
+			return Constants.SLED_HOME;
+		if (Controller1.getYButton())
+			// High
+			return Constants.SLED_HIGH;
+		if (Controller1.getBButton())
+			// Medium
+			return Constants.SLED_MEDIUM;
+		if (Controller1.getAButton())
+			// Low
+			return Constants.SLED_LOW;
+		if (Controller1.getXButton()) {
+			// Loading
+			return Constants.SLED_LOADING;
+		}
+		return Math.PI;
+	}
 
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.

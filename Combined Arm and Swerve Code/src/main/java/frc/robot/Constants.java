@@ -191,6 +191,10 @@ public final class Constants {
 	public static final int ARM_MOTOR_2 = 10;
 	public static final int SLED_MOTOR_ID = 7;
 
+	public static final int CLAW_SOLENOID_ID1 = 1;
+	public static final int CLAW_SOLENOID_ID2 = 0;
+	public static final int REVPH_ID = 5;
+	
 	public static final int ARM_ENCODER = 7;
 	public static final int SLED_ENCODER_ID1 = 8;
 	public static final int SLED_ENCODER_ID2 = 9;
@@ -211,4 +215,13 @@ public final class Constants {
 	public static final int BUTTON_7_ID = 7;
 	public static final int BUTTON_2_ID = 2;
 	public static final int BUTTON_1_ID = 1;
+
+	public static final double MAX_ARM_ENCODER = 0.88;
+	public static final double MIN_ARM_ENCODER = 0.63;
+
+	public static final double SLED_HOME = 300;
+	public static final double SLED_LOADING = 300;
+	public static final double SLED_LOW = 1680;
+	public static final double SLED_MEDIUM = 5775;
+	public static final double SLED_HIGH = 13000;
 }
