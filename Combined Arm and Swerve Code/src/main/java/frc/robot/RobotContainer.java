@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -22,6 +23,8 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.TractorToolbox.JoystickUtils;
 import frc.robot.TractorToolbox.TractorParts.PathBuilder;
 import frc.robot.commands.ClawToggle;
+import frc.robot.commands.DriveOutAuto;
+import frc.robot.commands.ManualModeToggle;
 import frc.robot.commands.TurnCommand;
 import frc.robot.commands.Autonomous.BalanceCommand;
 import frc.robot.commands.Limelight.LLAlignCommand;
@@ -44,6 +47,7 @@ public class RobotContainer {
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	public static arm m_arm = new arm();
 	public static clawSubsystem m_claw = new clawSubsystem();
+	private Command m_driveOut = new DriveOutAuto();
 
 
 	public final static PathBuilder autoBuilder = new PathBuilder();
@@ -93,6 +97,7 @@ public class RobotContainer {
 
 		autoChooser.addOption("Square", autoBuilder.getPathCommand("New Path"));
 		autoChooser.addOption("Triangle", autoBuilder.getPathCommand("PathPlanner Fun"));
+		autoChooser.addOption("DriveOut", new SequentialCommandGroup(m_driveOut, autoBuilder.getPathCommand("1 Ball High")));
 		// endregion
 	}
 
@@ -113,6 +118,7 @@ public class RobotContainer {
 		driveJoystick.button(3).whileTrue(new LLAlignCommand(false));
 		driveJoystick.button(4).whileTrue(new LLAlignCommand(true));
 		driveJoystick.button(5).whileTrue(new BalanceCommand());
+		button12.whileTrue(new BalanceCommand());
 		programmerController.a().whileTrue(new LLAlignCommand(false));
 		programmerController.x().whileTrue(new TurnCommand(180));
 		// endregion
@@ -129,7 +135,7 @@ public class RobotContainer {
 
 		button12.whileTrue(new BalanceCommand());
 		// Runs limemlightCommand while button 7 is pressed
-		// backButton.onTrue(new ManualModeToggle()); FIXME
+		backButton.onTrue(new ManualModeToggle());
 		rbumper.onTrue(new ClawToggle());
 
 		driveJoystick.povUp().whileTrue(

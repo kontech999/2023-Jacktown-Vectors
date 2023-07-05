@@ -11,6 +11,7 @@ import frc.robot.commands.ArmCommand;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class arm extends SubsystemBase {
@@ -107,6 +108,8 @@ public class arm extends SubsystemBase {
 
   @Override
   public void periodic() {
+	SmartDashboard.putNumber("Sled Encoder", getBCEncoder());
+	SmartDashboard.putNumber("Arm Encoder", getABEncoder());
     // This method will be called once per scheduler run
     setDefaultCommand(new ArmCommand());
   }

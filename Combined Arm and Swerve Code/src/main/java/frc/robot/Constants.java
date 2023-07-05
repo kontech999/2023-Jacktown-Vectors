@@ -59,10 +59,10 @@ public final class Constants {
 		public static final int kRearRightTurningMotorPort = 3;
 
 		// CANcoder CAN ID's
-		public static final int kFrontLeftTurningEncoderPort = 11;
-		public static final int kFrontRightTurningEncoderPort = 9;
-		public static final int kRearLeftTurningEncoderPort = 12;
-		public static final int kRearRightTurningEncoderPort = 10;
+		public static final int kFrontLeftTurningEncoderPort = 21;
+		public static final int kFrontRightTurningEncoderPort = 19;
+		public static final int kRearLeftTurningEncoderPort = 22;
+		public static final int kRearRightTurningEncoderPort = 20;
 
 		// Offset angle for absolute encoders (find this using CTRE client)
 		public static final double kFrontLeftAngleZero = 61.0;
@@ -189,7 +189,7 @@ public final class Constants {
 
 	public static final int ARM_MOTOR_1 = 11;
 	public static final int ARM_MOTOR_2 = 10;
-	public static final int SLED_MOTOR_ID = 7;
+	public static final int SLED_MOTOR_ID = 12;
 
 	public static final int CLAW_SOLENOID_ID1 = 1;
 	public static final int CLAW_SOLENOID_ID2 = 0;
