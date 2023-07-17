@@ -72,7 +72,7 @@ public final class Constants {
 
 		public static final PIDGains kModuleDriveGains = new PIDGains(.1, 0, 0);
 
-		public static final PIDGains kModuleTurningGains = new PIDGains(1, 0.0, 0.0);
+		public static final PIDGains kModuleTurningGains = new PIDGains(1.5, 0, 0.0016);
 
 		
 
@@ -142,8 +142,8 @@ public final class Constants {
 		public static final double kTurnCommandToleranceDeg = 0.5;
 		public static final double kTurnCommandRateToleranceDegPerS = 0;
 
-		public static final double kBalnaceCommandDeadbandDeg = 2;
-		public static final PIDGains kBalanceCommandGains = new PIDGains(.006, 0, 0);
+		public static final double kBalnaceCommandDeadbandDeg = -2.5;
+		public static final PIDGains kBalanceCommandGains = new PIDGains(.015, 0, 0);
 		public static final double kMaxBalancingVelocity = 1000;
 		public static final double kMaxBalancingAcceleration = 5000;
 	}
@@ -217,7 +217,7 @@ public final class Constants {
 	public static final int BUTTON_1_ID = 1;
 
 	public static final double MAX_ARM_ENCODER = 0.88;
-	public static final double MIN_ARM_ENCODER = 0.63;
+	public static final double MIN_ARM_ENCODER = 0.65;
 
 	public static final double SLED_HOME = 300;
 	public static final double SLED_LOADING = 300;

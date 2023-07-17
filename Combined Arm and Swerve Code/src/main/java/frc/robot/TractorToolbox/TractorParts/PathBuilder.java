@@ -65,7 +65,7 @@ public class PathBuilder {
 
 	/** fills the path map with paths from the pathplanner directory */
 	public void populatePathMap() {
-		String[] pathNames = {"Square", "New Path", "PathPlanner Fun", "1 Ball High"};
+		String[] pathNames = {"Square", "New Path", "PathPlanner Fun", "1 Ball High", "2 Piece Left"};
 		for (int i = 0; i < pathNames.length; i++) {
 			String pathName = pathNames[i];
 			pathMap.put(

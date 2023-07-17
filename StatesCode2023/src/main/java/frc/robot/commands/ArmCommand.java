@@ -48,6 +48,7 @@ public class ArmCommand extends CommandBase {
     SmartDashboard.putBoolean("Limit Switch Retract", RobotContainer.m_arm.getRetractState());
     SmartDashboard.putNumber("arm encoder", RobotContainer.m_arm.getABEncoder());
     SmartDashboard.putNumber("bc encoder", RobotContainer.m_arm.getBCEncoder());
+    SmartDashboard.putBoolean("Auton", RobotContainer.m_arm.auton);
     // This set restrict the encoder value
     if (0.05 < RobotContainer.m_arm.getABEncoder() && RobotContainer.m_arm.getABEncoder() < 0.95&&!RobotContainer.m_arm.auton
     // && 0.05 < RobotContainer.m_arm.getBCEncoder() &&

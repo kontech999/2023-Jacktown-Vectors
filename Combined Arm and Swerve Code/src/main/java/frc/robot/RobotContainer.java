@@ -24,7 +24,9 @@ import frc.robot.TractorToolbox.JoystickUtils;
 import frc.robot.TractorToolbox.TractorParts.PathBuilder;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.DriveOutAuto;
+import frc.robot.commands.LeftAuto2Piece;
 import frc.robot.commands.ManualModeToggle;
+import frc.robot.commands.MiddleBalance;
 import frc.robot.commands.TurnCommand;
 import frc.robot.commands.Autonomous.BalanceCommand;
 import frc.robot.commands.Limelight.LLAlignCommand;
@@ -48,6 +50,8 @@ public class RobotContainer {
 	public static arm m_arm = new arm();
 	public static clawSubsystem m_claw = new clawSubsystem();
 	private Command m_driveOut = new DriveOutAuto();
+	private Command m_middleBalance = new MiddleBalance();
+	private Command m_leftAuto2Piece = new LeftAuto2Piece();
 
 
 	public final static PathBuilder autoBuilder = new PathBuilder();
@@ -67,6 +71,8 @@ public class RobotContainer {
 	private CommandXboxController ccontroller = new CommandXboxController(Constants.XBOXCONTROLLER_ID);
 	public JoystickButton button12 = new JoystickButton(Leftjoy, Constants.BUTTON_12_ID);
 	public JoystickButton button10 = new JoystickButton(Leftjoy, Constants.BUTTON_10_ID);
+	public JoystickButton rightButton12 = new JoystickButton(Rightjoy, Constants.BUTTON_12_ID);
+	public JoystickButton rightButton11 = new JoystickButton(Rightjoy, 11);
 	public JoystickButton button9 = new JoystickButton(Leftjoy, Constants.BUTTON_9_ID);
 	public JoystickButton button8 = new JoystickButton(Leftjoy, Constants.BUTTON_8_ID);
 	public JoystickButton button7 = new JoystickButton(Leftjoy, Constants.BUTTON_7_ID);
@@ -97,7 +103,10 @@ public class RobotContainer {
 
 		autoChooser.addOption("Square", autoBuilder.getPathCommand("New Path"));
 		autoChooser.addOption("Triangle", autoBuilder.getPathCommand("PathPlanner Fun"));
-		autoChooser.addOption("DriveOut", new SequentialCommandGroup(m_driveOut, autoBuilder.getPathCommand("1 Ball High")));
+		autoChooser.addOption("DriveOut", new SequentialCommandGroup(new DriveOutAuto(), autoBuilder.getPathCommand("1 Ball High")));
+		autoChooser.addOption("Middle Balance", m_middleBalance);
+		autoChooser.addOption("2 Piece Left", new SequentialCommandGroup(new DriveOutAuto(), autoBuilder.getPathCommand("2 Piece Left"), m_leftAuto2Piece));
+		//autoChooser.addOption("2 Piece Left", new SequentialCommandGroup(m_driveOut, autoBuilder.getPathCommand("2 Piece Left")));
 		// endregion
 	}
 
@@ -115,24 +124,25 @@ public class RobotContainer {
 	private void configureBindings() {
 
 		// region Targeting Commmands
-		driveJoystick.button(3).whileTrue(new LLAlignCommand(false));
-		driveJoystick.button(4).whileTrue(new LLAlignCommand(true));
-		driveJoystick.button(5).whileTrue(new BalanceCommand());
-		button12.whileTrue(new BalanceCommand());
-		programmerController.a().whileTrue(new LLAlignCommand(false));
-		programmerController.x().whileTrue(new TurnCommand(180));
+		// driveJoystick.button(3).whileTrue(new LLAlignCommand(false));
+		// driveJoystick.button(4).whileTrue(new LLAlignCommand(true));
+		// driveJoystick.button(5).whileTrue(new BalanceCommand());
+		button12.onTrue(new BalanceCommand());
+		// programmerController.a().whileTrue(new LLAlignCommand(false));
+		// programmerController.x().whileTrue(new TurnCommand(180));
 		// endregion
 
 		// test balance
-		operatorController.button(12).whileTrue(new BalanceCommand());
+		// operatorController.button(12).whileTrue(new BalanceCommand());
 
 		// region Drive Commands
-		driveJoystick.button(11).onTrue(new InstantCommand(() -> driveSubsystem.zeroHeading()));
-		driveJoystick.button(12).onTrue(driveSubsystem.toggleFieldCentric());
+		// driveJoystick.button(11).onTrue(new InstantCommand(() -> driveSubsystem.zeroHeading()));
+		// driveJoystick.button(12).onTrue(driveSubsystem.toggleFieldCentric());
 
-		programmerController.button(8).onTrue(new InstantCommand(() -> driveSubsystem.zeroHeading()));
-		programmerController.button(6).onTrue(driveSubsystem.toggleFieldCentric());
-
+		// programmerController.button(8).onTrue(new InstantCommand(() -> driveSubsystem.zeroHeading()));
+		// programmerController.button(6).onTrue(driveSubsystem.toggleFieldCentric());
+		rightButton11.onTrue(new InstantCommand(() -> driveSubsystem.zeroHeading()));
+		rightButton12.onTrue(driveSubsystem.toggleFieldCentric());
 		button12.whileTrue(new BalanceCommand());
 		// Runs limemlightCommand while button 7 is pressed
 		backButton.onTrue(new ManualModeToggle());
@@ -194,7 +204,7 @@ public class RobotContainer {
 			return 0.87;
 		if (Controller1.getYButton())
 			// High pos
-			return 0.67;
+			return 0.66;
 		if (Controller1.getBButton())
 			// Medium pos
 			return 0.70;

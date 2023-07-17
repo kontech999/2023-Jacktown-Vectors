@@ -192,16 +192,16 @@ public class SwerveModule {
 	}
 
 	public void resetEncoders() {
-		Timer.delay(.1);
-		absoluteEncoder.configFactoryDefault();
-		Timer.delay(.1);
-		absoluteEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
-		Timer.delay(.1);
-		absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
-		Timer.delay(.1);
-		absoluteEncoder.configMagnetOffset(-1 * angleZero);
-		Timer.delay(.1);
-		absoluteEncoder.clearStickyFaults();
+		// Timer.delay(.1);
+		// absoluteEncoder.configFactoryDefault();
+		// Timer.delay(.1);
+		// absoluteEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
+		// Timer.delay(.1);
+		// absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+		// Timer.delay(.1);
+		// absoluteEncoder.configMagnetOffset(-1 * angleZero);
+		// Timer.delay(.1);
+		// absoluteEncoder.clearStickyFaults();
 	}
 
 	public void stopMotors() {

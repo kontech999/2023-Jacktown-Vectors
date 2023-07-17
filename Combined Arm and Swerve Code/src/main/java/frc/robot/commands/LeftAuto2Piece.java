@@ -5,21 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class DriveOutAuto extends SequentialCommandGroup {
-	/** Creates a new DriveOutAuto. */
-	public DriveOutAuto() {
+public class LeftAuto2Piece extends SequentialCommandGroup {
+	/** Creates a new LeftAuto2Piece. */
+	public LeftAuto2Piece() {
 		// Add your commands in the addCommands() call, e.g.
 		// addCommands(new FooCommand(), new BarCommand());
-		addCommands(new ClawHomePosition(0.66, 800),
-				new SlideAuto(12310, 800),
-				new ClawOut(),
-				new WaitCommand(0.250),
-				new SlideAuto(300, 800));
-
+		addCommands(
+				new ClawHomePosition(0.80, 800),
+				new SlideAuto(1680, 800),
+				new ClawIn());
 	}
 }
