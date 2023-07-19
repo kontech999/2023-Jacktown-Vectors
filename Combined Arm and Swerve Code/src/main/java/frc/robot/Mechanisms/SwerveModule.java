@@ -70,7 +70,7 @@ public class SwerveModule {
 
 		turnMotor.restoreFactoryDefaults();
 		driveMotor.restoreFactoryDefaults();
-
+		
 		turnMotor.setInverted(true);
 		// driveMotor.setInverted(true);
 

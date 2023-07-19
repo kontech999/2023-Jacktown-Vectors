@@ -28,7 +28,7 @@ public final class Constants {
 
 		// Current limits for the wheels
 		public static final int kTurnMotorCurrentLimit = 25;
-		public static final int kDriveMotorCurrentLimit = 35;
+		public static final int kDriveMotorCurrentLimit = 30;
 
 		// Constants set for the _SDS MK4i_
 		public static final double kdriveGearRatio = 1d / 6.75;
@@ -136,14 +136,14 @@ public final class Constants {
 
 		public static final double kScoreSequenceDropTime = 3; // in seconds
 
-		public static final PIDGains kTurnCommandGains = new PIDGains(.004, 0.0003, 0);
+		public static final PIDGains kTurnCommandGains = new PIDGains(.004, 0, 0);
 		public static final double kTurnCommandMaxVelocity = 1;
 		public static final double kTurnCommandMaxAcceleration = 1;
 		public static final double kTurnCommandToleranceDeg = 0.5;
 		public static final double kTurnCommandRateToleranceDegPerS = 0;
 
 		public static final double kBalnaceCommandDeadbandDeg = -2.5;
-		public static final PIDGains kBalanceCommandGains = new PIDGains(.015, 0, 0);
+		public static final PIDGains kBalanceCommandGains = new PIDGains(.017, 0, 0);
 		public static final double kMaxBalancingVelocity = 1000;
 		public static final double kMaxBalancingAcceleration = 5000;
 	}

@@ -157,9 +157,9 @@ public class RobotContainer {
 		driveSubsystem.setDefaultCommand(
 				new RunCommand(
 						() -> driveSubsystem.drive(
-								-JoystickUtils.processJoystickInput(driveJoystick.getY())
+								JoystickUtils.processJoystickInput(driveJoystick.getY())
 										- JoystickUtils.processJoystickInput(programmerController.getLeftY()), // x axis
-								-JoystickUtils.processJoystickInput(driveJoystick.getX())
+								JoystickUtils.processJoystickInput(driveJoystick.getX())
 										- JoystickUtils.processJoystickInput(programmerController.getLeftX()), // y axis
 								-JoystickUtils.processJoystickInput(turnJoystick.getX())
 										- JoystickUtils.processJoystickInput(programmerController.getRightX()), // rot

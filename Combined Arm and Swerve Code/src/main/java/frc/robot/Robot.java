@@ -103,6 +103,10 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
+		
+		RobotContainer.driveSubsystem.zeroHeading();
+		RobotContainer.driveSubsystem.toggleFieldCentric();
+
 
 	}
 

@@ -62,7 +62,7 @@ public class BalanceCommand extends CommandBase {
 		SmartDashboard.putString("I am trying to balance", " ");
 		// Roll is associated with driving
 		// Pitch is associated with strafing
-		double driveOutput = !isEngaged ? -0.3 : 0;
+		double driveOutput = !isEngaged ? -0.35 : 0;
 
 		// checks to see if the charge station is close to balanced
 		if (Math.abs(driveSubsystem.getRoll() + driveSubsystem.getPitch()
