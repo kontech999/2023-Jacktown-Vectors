@@ -106,6 +106,7 @@ public class RobotContainer {
 		autoChooser.addOption("DriveOut", new SequentialCommandGroup(new DriveOutAuto(), autoBuilder.getPathCommand("1 Ball High")));
 		autoChooser.addOption("Middle Balance", m_middleBalance);
 		autoChooser.addOption("2 Piece Left", new SequentialCommandGroup(new DriveOutAuto(), autoBuilder.getPathCommand("2 Piece Left"), m_leftAuto2Piece));
+		autoChooser.addOption("Path Planner Test", autoBuilder.getPathCommand("1 Ball High"));
 		//autoChooser.addOption("2 Piece Left", new SequentialCommandGroup(m_driveOut, autoBuilder.getPathCommand("2 Piece Left")));
 		// endregion
 	}
@@ -141,6 +142,7 @@ public class RobotContainer {
 
 		// programmerController.button(8).onTrue(new InstantCommand(() -> driveSubsystem.zeroHeading()));
 		// programmerController.button(6).onTrue(driveSubsystem.toggleFieldCentric());
+		lTrigger.onTrue(new InstantCommand(() -> driveSubsystem.resetEncoders()));
 		rightButton11.onTrue(new InstantCommand(() -> driveSubsystem.zeroHeading()));
 		rightButton12.onTrue(driveSubsystem.toggleFieldCentric());
 		button12.whileTrue(new BalanceCommand());

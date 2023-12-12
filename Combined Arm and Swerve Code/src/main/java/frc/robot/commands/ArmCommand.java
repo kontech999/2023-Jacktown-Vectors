@@ -53,8 +53,8 @@ public class ArmCommand extends CommandBase {
     ) {
       double leftjoystick = Robot.m_robotContainer.GetXboxStickLeft();
       double rightjoystick = Robot.m_robotContainer.GetXboxStickRight();
-      SmartDashboard.putNumber("arm encoder target", armEncoderPosition);
-      SmartDashboard.putNumber("bc encoder target", BCEncoderPosition);
+    //   SmartDashboard.putNumber("arm encoder target", armEncoderPosition);
+    //   SmartDashboard.putNumber("bc encoder target", BCEncoderPosition);
       SmartDashboard.putBoolean("Maunal Mode", RobotContainer.m_arm.manualMode);
       if (!RobotContainer.m_arm.getRetractState()) {
         RobotContainer.m_arm.setSledEncoderZero();
@@ -106,7 +106,7 @@ public class ArmCommand extends CommandBase {
         }
         double power1 = RobotContainer.m_arm.setABTicks(armEncoderPosition, 0.6);
         //double power2 = RobotContainer.m_arm.setBCTicks(8000, 0.6);
-        SmartDashboard.putNumber("ArmMotorPower", power1);
+        //SmartDashboard.putNumber("ArmMotorPower", power1);
         RobotContainer.m_arm.moveArmMotors(-power1);
         BCMovePosition = BCEncoderPosition;
         // RobotContainer.m_arm.bcMoveMotors(power2);
@@ -170,9 +170,9 @@ public class ArmCommand extends CommandBase {
         } else if (RobotContainer.m_arm.getABEncoder() > 0.85) {
           BCEncoderPosition = 300;
         }
-        SmartDashboard.putNumber("Power AB", power1);
+        //SmartDashboard.putNumber("Power AB", power1);
         double power2 = RobotContainer.m_arm.setBCTicks(BCEncoderPosition, 0.6);
-        SmartDashboard.putNumber("Sled Power", power2);
+        //SmartDashboard.putNumber("Sled Power", power2);
         if (power2 < 0 && RobotContainer.m_arm.getRetractState()) {
           RobotContainer.m_arm.moveSledMotors(-power2);
         } else if (power2 > 0 && RobotContainer.m_arm.getExtendState()) {
@@ -180,7 +180,7 @@ public class ArmCommand extends CommandBase {
         } else {
           RobotContainer.m_arm.moveSledMotors(0);
         }
-        SmartDashboard.putNumber("Time Elapsed for down Delay", System.currentTimeMillis() - timerStart);
+        //SmartDashboard.putNumber("Time Elapsed for down Delay", System.currentTimeMillis() - timerStart);
         if (System.currentTimeMillis() - timerStart > 1000) {
           RobotContainer.m_arm.moveArmMotors(-power1);
         } else {

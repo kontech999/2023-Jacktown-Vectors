@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.Autonomous.TimedDriveCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -19,7 +20,11 @@ public class DriveOutAuto extends SequentialCommandGroup {
 				new SlideAuto(12310, 800),
 				new ClawOut(),
 				new WaitCommand(0.250),
-				new SlideAuto(300, 800));
+				new SlideAuto(300, 800),
+				// new ParallelGroupMethod(
+						new ClawHomePosition(0.87, 800)
+						//new TimedDriveCommand(-.3, 0, 0, 3700))
+						);
 
 	}
 }

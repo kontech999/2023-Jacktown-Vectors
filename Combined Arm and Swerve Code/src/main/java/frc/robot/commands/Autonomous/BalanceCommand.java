@@ -34,7 +34,7 @@ public class BalanceCommand extends CommandBase {
 				new TrapezoidProfile.Constraints(AutoConstants.kMaxBalancingVelocity,
 						AutoConstants.kMaxBalancingAcceleration));
 		drivePIDControllerBackwards = new ProfiledPIDController(
-				0.007,
+				0.01,
 				AutoConstants.kBalanceCommandGains.kI,
 				AutoConstants.kBalanceCommandGains.kD,
 				new TrapezoidProfile.Constraints(AutoConstants.kMaxBalancingVelocity,
@@ -59,10 +59,9 @@ public class BalanceCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		SmartDashboard.putString("I am trying to balance", " ");
 		// Roll is associated with driving
 		// Pitch is associated with strafing
-		double driveOutput = !isEngaged ? -0.35 : 0;
+		double driveOutput = !isEngaged ? -0.4 : 0;
 
 		// checks to see if the charge station is close to balanced
 		if (Math.abs(driveSubsystem.getRoll() + driveSubsystem.getPitch()
@@ -80,8 +79,8 @@ public class BalanceCommand extends CommandBase {
 				// end = true;
 			}
 		}
-		SmartDashboard.putNumber("Balance Power", driveOutput);
-		SmartDashboard.putNumber("Current Angle", driveSubsystem.getRoll() + driveSubsystem.getPitch() - offset);
+		// SmartDashboard.putNumber("Balance Power", driveOutput);
+		// SmartDashboard.putNumber("Current Angle", driveSubsystem.getRoll() + driveSubsystem.getPitch() - offset);
 		// add strafe output here to have the robot strafe while balancing
 		driveSubsystem.drive(-driveOutput, 0, 0);
 	}

@@ -149,29 +149,29 @@ public class DriveSubsystem extends SubsystemBase {
 			rearRight.resetEncoders();
 		}
 
-		SmartDashboard.putNumber("FL Absolute", frontLeft.getAbsoluteHeading());
-		SmartDashboard.putNumber("FR Absolute", frontRight.getAbsoluteHeading());
-		SmartDashboard.putNumber("RL Absolute", rearLeft.getAbsoluteHeading());
-		SmartDashboard.putNumber("RR Absolute", rearRight.getAbsoluteHeading());
+		// SmartDashboard.putNumber("FL Absolute", frontLeft.getAbsoluteHeading());
+		// SmartDashboard.putNumber("FR Absolute", frontRight.getAbsoluteHeading());
+		// SmartDashboard.putNumber("RL Absolute", rearLeft.getAbsoluteHeading());
+		// SmartDashboard.putNumber("RR Absolute", rearRight.getAbsoluteHeading());
 
-		SmartDashboard.putNumber("FL Offset Check", frontLeft.getAbsoluteHeading() + frontLeft.angleZero);
-		SmartDashboard.putNumber("FR Offset Check", frontRight.getAbsoluteHeading() + frontRight.angleZero);
-		SmartDashboard.putNumber("RL Offset Check", rearLeft.getAbsoluteHeading() + rearLeft.angleZero);
-		SmartDashboard.putNumber("RR Offset Check", rearRight.getAbsoluteHeading() + rearRight.angleZero);
+		// SmartDashboard.putNumber("FL Offset Check", frontLeft.getAbsoluteHeading() + frontLeft.angleZero);
+		// SmartDashboard.putNumber("FR Offset Check", frontRight.getAbsoluteHeading() + frontRight.angleZero);
+		// SmartDashboard.putNumber("RL Offset Check", rearLeft.getAbsoluteHeading() + rearLeft.angleZero);
+		// SmartDashboard.putNumber("RR Offset Check", rearRight.getAbsoluteHeading() + rearRight.angleZero);
 
-		SmartDashboard.putNumber("Gyro yaw", gyro.getYaw());
-		SmartDashboard.putNumber("Gyro pitch", gyro.getPitch());
-		SmartDashboard.putNumber("Gyro roll", gyro.getRoll());
+		// SmartDashboard.putNumber("Gyro yaw", gyro.getYaw());
+		// SmartDashboard.putNumber("Gyro pitch", gyro.getPitch());
+		// SmartDashboard.putNumber("Gyro roll", gyro.getRoll());
 
-		SmartDashboard.putNumber("FL Meters", frontLeft.getDistanceMeters());
-		SmartDashboard.putNumber("FR Meters", frontRight.getDistanceMeters());
-		SmartDashboard.putNumber("RL Meters", rearLeft.getDistanceMeters());
-		SmartDashboard.putNumber("RR Meters", rearRight.getDistanceMeters());
+		// SmartDashboard.putNumber("FL Meters", frontLeft.getDistanceMeters());
+		// SmartDashboard.putNumber("FR Meters", frontRight.getDistanceMeters());
+		// SmartDashboard.putNumber("RL Meters", rearLeft.getDistanceMeters());
+		// SmartDashboard.putNumber("RR Meters", rearRight.getDistanceMeters());
 
-		SmartDashboard.putData("field", field);
-		SmartDashboard.putNumber("2D Gyro", odometry.getPoseMeters().getRotation().getDegrees());
-		SmartDashboard.putNumber("2D X", getPose().getX());
-		SmartDashboard.putNumber("2D Y", getPose().getY());
+		// SmartDashboard.putData("field", field);
+		// SmartDashboard.putNumber("2D Gyro", odometry.getPoseMeters().getRotation().getDegrees());
+		// SmartDashboard.putNumber("2D X", getPose().getX());
+		// SmartDashboard.putNumber("2D Y", getPose().getY());
 	}
 
 	// region getters

@@ -72,7 +72,7 @@ public class LLAlignCommand extends CommandBase {
 
 		if (LimelightHelpers.getTV("")) {
 
-			SmartDashboard.putNumber("LL TX", LimelightHelpers.getTX(""));
+			//SmartDashboard.putNumber("LL TX", LimelightHelpers.getTX(""));
 
 			double strafePIDOutput = StrafePIDController.calculate(LimelightHelpers.getTX(""), 0);
 			double drivePIDOutput = DrivePIDController.calculate(LimelightHelpers.getTY(""), 0);

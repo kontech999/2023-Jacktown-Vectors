@@ -6,6 +6,8 @@ package frc.robot;
 
 import com.pathplanner.lib.server.PathPlannerServer;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -23,7 +25,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
 	private Command autonomousCommand;
-
+	Thread m_visionThread1;
 	public static RobotContainer m_robotContainer;
 
 	/**
@@ -35,13 +37,23 @@ public class Robot extends TimedRobot {
 		// Instantiate our RobotContainer. This will perform all our button bindings,
 		// and put our autonomous chooser on the dashboard.
 
-		for (int port = 5800; port <= 5805; port++) {
-			PortForwarder.add(port, "limelight.local", port);
-		}
+		// for (int port = 5800; port <= 5805; port++) {
+		// PortForwarder.add(port, "limelight.local", port);
+		// }
 
 		//PathPlannerServer.startServer(5811);
 
 		m_robotContainer = new RobotContainer();
+		m_visionThread1 = new Thread(
+				() -> {
+					// Get the UsbCamera from CameraServer
+					UsbCamera camera = CameraServer.startAutomaticCapture("ArmView", 0);
+					// Set the resolution
+					camera.setResolution(320, 240);
+					camera.setFPS(10);
+				});
+		m_visionThread1.setDaemon(true);
+		m_visionThread1.start();
 		DriverStation.silenceJoystickConnectionWarning(true);
 	}
 
@@ -79,13 +91,13 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		RobotContainer.m_arm.auton = true;
+		RobotContainer.driveSubsystem.zeroHeading();
 		autonomousCommand = m_robotContainer.getAutonomousCommand();
-
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			autonomousCommand.schedule();
 		}
-		
+
 	}
 
 	/** This function is called periodically during autonomous. */
@@ -103,10 +115,9 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		
+
 		RobotContainer.driveSubsystem.zeroHeading();
 		RobotContainer.driveSubsystem.toggleFieldCentric();
-
 
 	}
 

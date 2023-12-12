@@ -133,8 +133,8 @@ public class SwerveModule {
 		turnPID.setPositionPIDWrappingMinInput(-Math.PI);
 		turnPID.setPositionPIDWrappingMaxInput(Math.PI);
 
-		SmartDashboard.putNumber(this.moduleName + " Offset", angleZero);
-		SmartDashboard.putString(this.moduleName + " Abs. Status", absoluteEncoder.getLastError().toString());
+		//SmartDashboard.putNumber(this.moduleName + " Offset", angleZero);
+		//SmartDashboard.putString(this.moduleName + " Abs. Status", absoluteEncoder.getLastError().toString());
 	}
 
 	// Returns headings of the module
@@ -185,23 +185,23 @@ public class SwerveModule {
 				optimizedState.angle.getRadians(),
 				ControlType.kPosition);
 
-		SmartDashboard.putNumber(this.moduleName + " Optimized Angle", optimizedState.angle.getDegrees());
-		SmartDashboard.putNumber(this.moduleName + " Turn Motor Output", turnMotor.getAppliedOutput());
+		//SmartDashboard.putNumber(this.moduleName + " Optimized Angle", optimizedState.angle.getDegrees());
+		//SmartDashboard.putNumber(this.moduleName + " Turn Motor Output", turnMotor.getAppliedOutput());
 		// SmartDashboard.putNumber(this.moduleName + " Turn Output", turnOutput);
 
 	}
 
 	public void resetEncoders() {
 		// Timer.delay(.1);
-		// absoluteEncoder.configFactoryDefault();
+		absoluteEncoder.configFactoryDefault();
 		// Timer.delay(.1);
-		// absoluteEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
+		absoluteEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
 		// Timer.delay(.1);
-		// absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+		absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
 		// Timer.delay(.1);
-		// absoluteEncoder.configMagnetOffset(-1 * angleZero);
+		absoluteEncoder.configMagnetOffset(-1 * angleZero);
 		// Timer.delay(.1);
-		// absoluteEncoder.clearStickyFaults();
+		absoluteEncoder.clearStickyFaults();
 	}
 
 	public void stopMotors() {

@@ -22,8 +22,10 @@ public class MiddleBalance extends SequentialCommandGroup {
 				new ClawOut(),
 				new WaitCommand(0.250),
 				new SlideAuto(300, 800), 
-				new TimedDriveCommand(-.3, 0, 0, 3700),
-				new WaitCommand(1)
+				new ParallelGroupMethod(
+					new ClawHomePosition(0.87, 800), 
+					new TimedDriveCommand(-.4, 0, 0, 3800)),
+				new WaitCommand(0.5)
 				,new BalanceCommand()
 				);
 	}
